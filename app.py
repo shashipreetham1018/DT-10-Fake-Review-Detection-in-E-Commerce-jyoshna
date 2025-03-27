@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+import os
 
 app = Flask(__name__)
 
@@ -20,4 +21,5 @@ def predict():
     return render_template('predict.html')  # Serve the prediction page
 
 if __name__ == '__main__':
-    app.run(debug=True)  # Run the Flask app
+    port = int(os.environ.get("PORT", 5000))  # Use PORT from environment or default to 5000
+    app.run(host='0.0.0.0', port=port, debug=True)  # Ensure it binds to 0.0.0.0
